@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dakogx8vd1pim"
+path="res://.godot/imported/Shotgun.obj-dc7ee3303eca98109d05021968244fee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Shotgun.obj-dc7ee3303eca98109d05021968244fee.mesh"]
+
+source_file="res://Texturas/FPS Pack/OBJ/Shotgun.obj"
+dest_files=["res://.godot/imported/Shotgun.obj-dc7ee3303eca98109d05021968244fee.mesh", "res://.godot/imported/Shotgun.obj-dc7ee3303eca98109d05021968244fee.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
