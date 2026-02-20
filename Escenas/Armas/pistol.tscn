@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=4 uid="uid://b5v0rjhpqmcgc"]
+[gd_scene load_steps=15 format=4 uid="uid://b5v0rjhpqmcgc"]
 
-[ext_resource type="Script" path="res://Escenas/Armas/pistol.gd" id="1_0waue"]
+[ext_resource type="Script" uid="uid://bfbuj7gm56l0r" path="res://Escenas/Armas/pistol.gd" id="1_0waue"]
+[ext_resource type="PackedScene" uid="uid://bcc77nxggnk6u" path="res://Escenas/Armas/bullet_pistol.tscn" id="2_f6wa7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmh58"]
 resource_name = "Muzzle"
@@ -282,13 +283,14 @@ tracks/5/keys = PackedFloat32Array(0, 1, -0.000113605, -0.0185235, 0.041183)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pks1p"]
 _data = {
-"PistolArmature|Fire": SubResource("Animation_5kwj7"),
-"PistolArmature|Reload": SubResource("Animation_bglm3"),
-"PistolArmature|Slide": SubResource("Animation_l1ihg")
+&"PistolArmature|Fire": SubResource("Animation_5kwj7"),
+&"PistolArmature|Reload": SubResource("Animation_bglm3"),
+&"PistolArmature|Slide": SubResource("Animation_l1ihg")
 }
 
 [node name="Pistol" type="Node3D"]
 script = ExtResource("1_0waue")
+bullet_scene = ExtResource("2_f6wa7")
 
 [node name="PistolArmature" type="Node3D" parent="."]
 transform = Transform3D(1.91069e-13, -4.37114e-06, 100, -100, -4.37114e-06, 0, 4.37114e-06, -100, -4.37114e-06, 0, 0, 0)
@@ -345,15 +347,23 @@ bones/6/position = Vector3(0, 0.0377574, 0)
 bones/6/rotation = Quaternion(0, 0, 0, 1)
 bones/6/scale = Vector3(1, 1, 1)
 
-[node name="Muzzle" type="MeshInstance3D" parent="PistolArmature/Skeleton3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PistolArmature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_tewvc")
 skin = SubResource("Skin_h3uoc")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="PistolArmature/Skeleton3D"]
+transform = Transform3D(1, 0, 0, 0, -3.4289e-07, -1, 0, 1, -3.4289e-07, 0, 1.28002e-08, -0.0474176)
+bone_name = "Slide"
+bone_idx = 1
+
+[node name="Marker3D" type="Marker3D" parent="PistolArmature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, -1.69407e-21, 1, 0, 0, 0, 1, 0.000845497, 0.112155, 0.000191312)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -100)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_pks1p")
+&"": SubResource("AnimationLibrary_pks1p")
 }
 speed_scale = 4.0

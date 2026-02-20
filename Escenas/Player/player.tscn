@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqtcqxxcc7npm"]
+[gd_scene load_steps=7 format=3 uid="uid://dqtcqxxcc7npm"]
 
-[ext_resource type="Script" path="res://Escenas/Player/player.gd" id="1_vw167"]
+[ext_resource type="Script" uid="uid://cjw62n5rlpjj4" path="res://Escenas/Player/player.gd" id="1_vw167"]
+[ext_resource type="Script" uid="uid://bhc1ysennpwdv" path="res://Escenas/Player/weapon_holder.gd" id="2_kxdp4"]
 [ext_resource type="PackedScene" uid="uid://b5v0rjhpqmcgc" path="res://Escenas/Armas/pistol.tscn" id="2_nmtbd"]
+[ext_resource type="Texture2D" uid="uid://b42ax20td1awj" path="res://Escenas/Player/crosshair066.png" id="3_rs2dv"]
+[ext_resource type="PackedScene" uid="uid://72ixod6wvyg1" path="res://beam_rifle.tscn" id="4_djt6s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yilcs"]
 
@@ -12,8 +15,52 @@ script = ExtResource("1_vw167")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.316824, 0)
 
-[node name="Pistol" parent="Camera3D" instance=ExtResource("2_nmtbd")]
+[node name="WeaponHolder" type="Node3D" parent="Camera3D"]
+script = ExtResource("2_kxdp4")
+
+[node name="Pistol" parent="Camera3D/WeaponHolder" instance=ExtResource("2_nmtbd")]
 transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.65, -0.2, -1.8)
+
+[node name="BeamRifle" parent="Camera3D/WeaponHolder" instance=ExtResource("4_djt6s")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.3, -0.3, -0.5)
+damage_per_second = 15.0
+explosion_damage = 60.0
+explosion_radius = 4.0
+max_charge_time = 2.0
+beam_range = 50.0
+max_beam_time = 5.0
+beam_min_width = 0.05
+beam_max_width = 0.2
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="TextureRect" parent="Camera3D/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rs2dv")
+expand_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_yilcs")
+
+[node name="BeamMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.649946, 1.12263, -2.33123)
+top_level = true
+cast_shadow = 0
+skeleton = NodePath("../Camera3D")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcc77nxggnk6u"]
+
+[ext_resource type="Script" uid="uid://d2fu7ebbgflkr" path="res://Escenas/Armas/bullet_pistol.gd" id="1_kwssb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mqc1a"]
+radius = 0.0005
+height = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0u3au"]
+radius = 0.15
+height = 0.3
+
+[node name="RigidBody" type="RigidBody3D"]
+transform = Transform3D(-0.000907584, -1, 0, 1, -0.000907584, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_kwssb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mqc1a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_0u3au")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

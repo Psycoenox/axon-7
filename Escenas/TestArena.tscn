@@ -61,6 +61,7 @@ ambient_light_color = Color(0.0650302, 0.0649058, 0.19306, 1)
 fog_enabled = true
 
 [node name="TestArena" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124857, -0.266554, -0.78985)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
